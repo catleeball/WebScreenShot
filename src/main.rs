@@ -4,7 +4,6 @@ use headless_chrome::{protocol::page::ScreenshotFormat, Browser};
 fn main() -> Result<(), failure::Error> {
     let url: &str = "file:////Users/int/src/tmnt_wikipedia_bot/assets/html/tmnt.html";
     let output_path: &str = "/tmp/logo.png";
-    // let element_to_await: &str = "#logo";
 
     let img = screenshot_webpage(url)?;
     std::fs::write(output_path, img)?;
