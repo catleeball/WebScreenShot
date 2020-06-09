@@ -26,7 +26,6 @@ fn main() -> Result<(), failure::Error> {
             .default_value("png")
             .possible_values(&["png", "jpg"]))
         .get_matches();
-
     let url: &str = args.value_of("url").unwrap();
     let output_path: &str = args.value_of("output-path").unwrap();
 
