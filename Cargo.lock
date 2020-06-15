@@ -388,6 +388,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "more-asserts"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0debeb9fcf88823ea64d64e4a815ab1643f33127d995978e099942ce38f25238"
+
+[[package]]
 name = "num_cpus"
 version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -702,15 +708,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2579985fda508104f7587689507983eadd6a6e84dd35d6d115361f530916fa0d"
 
 [[package]]
-name = "shotweb"
-version = "0.1.0"
-dependencies = [
- "clap",
- "failure",
- "headless_chrome",
-]
-
-[[package]]
 name = "smallvec"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -898,6 +895,16 @@ name = "wasi"
 version = "0.9.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cccddf32554fecc6acb585f82a32a72e28b48f8c4c1883ddfeeeaa96f7d8e519"
+
+[[package]]
+name = "webscreenshot"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "failure",
+ "headless_chrome",
+ "more-asserts",
+]
 
 [[package]]
 name = "websocket"
