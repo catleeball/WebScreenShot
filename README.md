@@ -4,11 +4,7 @@
 A simple CLI tool to take screenshots of rendered webpages, given a URL or local file path prepended by `file:///`.
 
 # Usage
-
 ```
-WebScreenShot 0.1.0
-Take screenshots of Chrome-rendered webpages.
-
 USAGE:
     wss [OPTIONS] <url> <output-path> [viewport]
 
