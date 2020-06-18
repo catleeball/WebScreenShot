@@ -3,24 +3,27 @@ use headless_chrome::{Browser, protocol::{target::methods::CreateTarget ,page::S
 /// Formats available to encode screenshots to.
 pub enum OutputFormat {PNG, JPG, PDF}
 
-/// Take a screenshot of a given Chrome tab.
+/// Take a screenshot of a webpage rendered in a Chrome tab.
 /// 
 /// ### Arguments
 /// - url: Web or file URL to render for screenshot.
 /// - format: The output format to encode the screenshot as.
-/// - quality: Only needed for JPGs. 0-100.
+/// - quality: JPG quality. 0-100. This is ignored for PNGs and PDFs.
 /// - surface: If true, screencap the entire rended HTML. If false, screencap what is visible inside the browser viewport dimensions.
+/// - width: Width of the Chrome browser.
+/// - height: Height of the Chrome browser.
+/// - element: CSS selector to screenshot instead of the full page. Empty string screenshots whole page.
 ///
 /// ### Example
 /// ```
 /// # use webscreenshotlib::{OutputFormat, screenshot_tab};
 /// # std::fs::write("/tmp/test.html", "<html><head><title>Title</title></head><body>Hello World</body></html>");
 /// # fn test_screenshot_tab() -> Result<(), failure::Error> {
+/// // Screenshot a page.
 /// let image_data = screenshot_tab(
 ///   "file:////tmp/test.html",
-///   OutputFormat::PNG,
-///   None, true, 1024, 800)?;
-/// # more_asserts::assert_ge!(image_data.len(), 1000);
+///   OutputFormat::PNG, None, true, 1024, 800, "")?;
+/// # more_asserts::assert_ge!(image_data.len(), 1024*800);
 /// # return Ok(())
 /// # }
 /// ```
@@ -28,10 +31,11 @@ pub enum OutputFormat {PNG, JPG, PDF}
 pub fn screenshot_tab(
     url: &str,
     format: OutputFormat,
-    quality: Option<u8>,
-    surface: bool,
+    quality: u8,
+    visible_only: bool,
     width: u16,
-    height: u16)
+    height: u16,
+    element: &str)
     -> Result<Vec<u8>, failure::Error>
 {
     // Get browser, navigate to page.
@@ -46,15 +50,20 @@ pub fn screenshot_tab(
     tab.navigate_to(url)?;
     tab.wait_until_navigated()?;
 
+    // If element arg is supplied, wait for it to load. This will signal the
+    // tab.capture_screenshot method to screenshot only the element.
+    if element.is_empty() != true {
+        tab.wait_for_element(element)?;
+    }
+
     // Take screenshot in given format, return image bytes.
     match format {
         OutputFormat::JPG => {
-            let quality = quality.unwrap_or(80);
             return Ok(tab.capture_screenshot(
-                ScreenshotFormat::JPEG(Some(quality.into())), None, surface)?);
+                ScreenshotFormat::JPEG(Some(quality.into())), None, !visible_only)?);
             },
         OutputFormat::PNG => return Ok(tab.capture_screenshot(
-            ScreenshotFormat::PNG, None, surface)?),
+            ScreenshotFormat::PNG, None, !visible_only)?),
         OutputFormat::PDF => return Ok(
             tab.print_to_pdf(None)?),
     };
