@@ -11,7 +11,7 @@ fn get_args() -> clap::ArgMatches<'static> {
             .help("URL or file to take a screencap of. i.e. https://example.com or file:///path/to/file.html")
             .index(1)
             .required(true)
-            .default_value("https://google.com"))
+            .default_value("https://wikipedia.org"))
         .arg(Arg::with_name("output-path")
             .help("Local file path to save screenshot image to.")
             .index(2)
@@ -60,15 +60,19 @@ fn fmt_str_to_enum(fmt: &str) -> OutputFormat {
 /// Fullscreen screenshot of entire surface of given URL rendered in Chrome.
 fn main() -> Result<(), failure::Error> {
     let args = get_args();
-    let quality: u8 = args.value_of("jpg-quality").unwrap().parse().unwrap();
+    let quality: u8 = args.value_of("jpg-quality").unwrap_or("80").parse().unwrap();
     let surface: bool = !(args.is_present("viewport") == true);
+    let width: u16 = args.value_of("width").unwrap_or("1024").parse().unwrap();
+    let height: u16 = args.value_of("height").unwrap_or("800").parse().unwrap();
     write_screenshot(
-        args.value_of("output-path").unwrap(),
+        args.value_of("output-path").unwrap_or("/tmp/screenshot.png"),
         screenshot_tab(
-            args.value_of("url").unwrap(),
+            args.value_of("url").unwrap_or("https://wikipedia.org"),
             fmt_str_to_enum(args.value_of("format").unwrap()),
             Some(quality),
             surface,
+            width,
+            height,
         )?,
     )?;
     Ok(())

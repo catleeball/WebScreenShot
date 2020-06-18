@@ -1,4 +1,4 @@
-use headless_chrome::{Browser, protocol::{page::ScreenshotFormat}};
+use headless_chrome::{Browser, protocol::{target::methods::CreateTarget ,page::ScreenshotFormat}};
 
 /// Formats available to encode screenshots to.
 pub enum OutputFormat {PNG, JPG, PDF}
@@ -19,8 +19,7 @@ pub enum OutputFormat {PNG, JPG, PDF}
 /// let image_data = screenshot_tab(
 ///   "file:////tmp/test.html",
 ///   OutputFormat::PNG,
-///   None,
-///   true)?;
+///   None, true, 1024, 800)?;
 /// # more_asserts::assert_ge!(image_data.len(), 1000);
 /// # return Ok(())
 /// # }
@@ -30,14 +29,24 @@ pub fn screenshot_tab(
     url: &str,
     format: OutputFormat,
     quality: Option<u8>,
-    surface: bool)
+    surface: bool,
+    width: u16,
+    height: u16)
     -> Result<Vec<u8>, failure::Error>
 {
+    // Get browser, navigate to page.
     let browser = Browser::default()?;
-    let tab = browser.wait_for_initial_tab()?;
+    let tab = browser.new_tab_with_options(CreateTarget {
+        url: url,
+        width: Some(width.into()),
+        height: Some(height.into()),
+        browser_context_id: None,
+        enable_begin_frame_control: None,
+    })?;
     tab.navigate_to(url)?;
     tab.wait_until_navigated()?;
 
+    // Take screenshot in given format, return image bytes.
     match format {
         OutputFormat::JPG => {
             let quality = quality.unwrap_or(80);
