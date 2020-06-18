@@ -8,6 +8,16 @@ name = "webscreenshot"
 version = "0.1.0"
 authors = ["🎷🐛 Lee Ball <lee.cat.ball@gmail.com>"]
 edition = "2018"
+description = ""
+homepage = "https://github.com/catleeball/WebScreenShot"
+repository = "https://github.com/catleeball/WebScreenShot"
+license = "Apache-2.0"
+readme = "README.md"
+keywords = ["webscreenshot", "wss", "screenshot", "web screenshot", "screencap", "capture", "html screenshot", "chrome screenshot", "chrome"]
+categories = ["command-line-utilities", "visualization", "development-tools::testing", "web-programming", "development-tools"]
+
+[badges]
+maintenance = { status = "experimental" }
 
 [features]
 cli-binary = ["clap"]

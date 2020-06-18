@@ -29,7 +29,10 @@ ARGS:
 ```
 
 # Install
-This package isn't yet available through crates.io or any package managers. Consider building the binary with the steps below and adding it to your path.
+WebScreenShot (`wss`) can be installed via crates.io:
+```
+cargo install webscreenshot
+```
 
 # Build
 This package can be built by running:
