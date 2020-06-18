@@ -1,5 +1,4 @@
-use headless_chrome::{Browser, Tab, protocol::{target::methods::CreateTarget, page::ScreenshotFormat}};
-use std::sync::Arc;
+use headless_chrome::{Browser, protocol::{page::ScreenshotFormat}};
 
 /// Formats available to encode screenshots to.
 pub enum OutputFormat {PNG, JPG, PDF}
