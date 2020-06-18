@@ -6,26 +6,28 @@ A simple CLI tool to take screenshots of rendered webpages, given a URL or local
 # Usage
 ```
 USAGE:
-    wss [OPTIONS] <url> <output-path> [viewport]
+    wss [FLAGS] [OPTIONS] <url> <output-path>
 
 FLAGS:
         --help       Prints help information
+    -q               Display no messages to stdout.
     -V, --version    Prints version information
+    -z               Screenshot only what is visible from the dimensions of the browser window, rather then the entire
+                     surface of the page.
 
 OPTIONS:
     -h <browser-height>        Height of the browser to render the webpage in. [default: 800]
     -w <browser-width>         Width of the browser to render the webpage in. [default: 1024]
+    -e <element>               CSS selector of element to screenshot.
     -f <format>                Format to save screenshot as. Must be one of png, jpg, or pdf. [default: png]  [possible
                                values: png, jpg, pdf]
-    -q <jpg-quality>           Quality of jpg screenshot to output, 0-100. Will be ignored if --image-format is not set
+    -j <jpg-quality>           Quality of jpg screenshot to output, 0-100. Will be ignored if --image-format is not set
                                to jpg. [default: 80]
 
 ARGS:
     <url>            URL or file to take a screencap of. i.e. https://example.com or file:///path/to/file.html
                      [default: https://wikipedia.org]
     <output-path>    Local file path to save screenshot image to. [default: /tmp/screenshot.png]
-    <viewport>       If flag is set, screenshot only the dimensions of the browser viewport, rather then the entire
-                     rendered page.
 ```
 
 # Install
