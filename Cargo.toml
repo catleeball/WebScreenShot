@@ -13,7 +13,7 @@ homepage = "https://github.com/catleeball/WebScreenShot"
 repository = "https://github.com/catleeball/WebScreenShot"
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["webscreenshot", "wss", "screenshot", "screencap", "capture", "chrome screenshot", "chrome", "web", "webpage", "html"]
+keywords = ["webscreenshot", "wss", "screenshot", "screencap", "capture", "chrome", "web", "webpage", "html"]
 categories = ["command-line-utilities", "visualization", "development-tools::testing", "web-programming", "development-tools"]
 
 [badges]
