@@ -5,7 +5,7 @@
 
 [package]
 name = "webscreenshot"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["🎷🐛 Lee Ball <lee.cat.ball@gmail.com>"]
 edition = "2018"
 description = "A simple CLI tool to take screenshots of rendered webpages, given a URL or local file path."
@@ -13,7 +13,7 @@ homepage = "https://github.com/catleeball/WebScreenShot"
 repository = "https://github.com/catleeball/WebScreenShot"
 license = "Apache-2.0"
 readme = "README.md"
-keywords = ["webscreenshot", "wss", "screenshot", "screencap", "capture", "html screenshot", "chrome screenshot", "chrome", "web", "webpage"]
+keywords = ["webscreenshot", "wss", "screenshot", "screencap", "capture", "chrome screenshot", "chrome", "web", "webpage", "html"]
 categories = ["command-line-utilities", "visualization", "development-tools::testing", "web-programming", "development-tools"]
 
 [badges]
