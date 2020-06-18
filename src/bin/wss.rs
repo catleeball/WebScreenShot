@@ -1,5 +1,5 @@
 use clap::{App, Arg, crate_version};
-use webscreenshotlib::{load_url, OutputFormat, screenshot_tab, write_screenshot};
+use webscreenshotlib::{OutputFormat, screenshot_tab, write_screenshot};
 
 /// Handle CLI arguments.
 fn get_args() -> clap::ArgMatches<'static> {
@@ -60,19 +60,12 @@ fn fmt_str_to_enum(fmt: &str) -> OutputFormat {
 /// Fullscreen screenshot of entire surface of given URL rendered in Chrome.
 fn main() -> Result<(), failure::Error> {
     let args = get_args();
-    let width: u16 = args.value_of("browser-width").unwrap().parse().unwrap();
-    let height: u16 = args.value_of("browser-height").unwrap().parse().unwrap();
     let quality: u8 = args.value_of("jpg-quality").unwrap().parse().unwrap();
     let surface: bool = !(args.is_present("viewport") == true);
     write_screenshot(
         args.value_of("output-path").unwrap(),
         screenshot_tab(
-            load_url(
-                args.value_of("url").unwrap(),
-                None, // args.value_of("element").unwrap(),
-                Some(width),
-                Some(height),
-            )?,
+            args.value_of("url").unwrap(),
             fmt_str_to_enum(args.value_of("format").unwrap()),
             Some(quality),
             surface,
