@@ -18,20 +18,28 @@ fn get_args() -> clap::ArgMatches<'static> {
             .required(true)
             .takes_value(true)
             .default_value("/tmp/screenshot.png"))
-        .arg(Arg::with_name("viewport")
-            .help("If flag is set, screenshot only the dimensions of the browser viewport, rather then the entire rendered page."))
         .arg(Arg::with_name("browser-width")
             .help("Width of the browser to render the webpage in.")
             .short("w")
+            .takes_value(true)
             .default_value("1024"))
         .arg(Arg::with_name("browser-height")
             .help("Height of the browser to render the webpage in.")
             .short("h")
+            .takes_value(true)
             .default_value("800"))
-        // .arg(Arg::with_name("element")
-        //     .help("CSS selector of element to screenshot.")
-        //     .short("e")
-        //     .takes_value(true))
+        .arg(Arg::with_name("element")
+            .help("CSS selector of element to screenshot.")
+            .short("e")
+            .takes_value(true))
+        .arg(Arg::with_name("visible-only")
+            .help("Screenshot only what is visible from the dimensions of the browser window, rather then the entire surface of the page.")
+            .short("z")
+            .takes_value(false))
+        .arg(Arg::with_name("quiet")
+            .help("Display no messages to stdout.")
+            .short("q")
+            .takes_value(false))
         .arg(Arg::with_name("format")
             .help("Format to save screenshot as. Must be one of png, jpg, or pdf.")
             .short("f")
@@ -40,7 +48,7 @@ fn get_args() -> clap::ArgMatches<'static> {
             .possible_values(&["png", "jpg", "pdf"]))
         .arg(Arg::with_name("jpg-quality")
             .help("Quality of jpg screenshot to output, 0-100. Will be ignored if --image-format is not set to jpg.")
-            .short("q")
+            .short("j")
             .takes_value(true)
             .default_value("80"))
         .get_matches();
@@ -56,24 +64,30 @@ fn fmt_str_to_enum(fmt: &str) -> OutputFormat {
     }
 }
 
-// TODO: Add CLI tests, add element screenshot feature.
+// TODO: Add CLI tests.
 /// Fullscreen screenshot of entire surface of given URL rendered in Chrome.
 fn main() -> Result<(), failure::Error> {
     let args = get_args();
+    let path: &str = args.value_of("output-path").unwrap_or("/tmp/screenshot.png");
     let quality: u8 = args.value_of("jpg-quality").unwrap_or("80").parse().unwrap();
-    let surface: bool = !(args.is_present("viewport") == true);
+    let visible_only: bool = args.is_present("visibleonly");
     let width: u16 = args.value_of("width").unwrap_or("1024").parse().unwrap();
     let height: u16 = args.value_of("height").unwrap_or("800").parse().unwrap();
+    let element: &str = args.value_of("element").unwrap_or("");
     write_screenshot(
-        args.value_of("output-path").unwrap_or("/tmp/screenshot.png"),
+        path,
         screenshot_tab(
             args.value_of("url").unwrap_or("https://wikipedia.org"),
             fmt_str_to_enum(args.value_of("format").unwrap()),
-            Some(quality),
-            surface,
+            quality,
+            visible_only,
             width,
             height,
+            element,
         )?,
     )?;
+    if !args.is_present("quiet") {
+        println!("Screenshot saved to {}", path);
+    }
     Ok(())
 }
