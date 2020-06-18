@@ -41,3 +41,7 @@ This package can be built by running:
 ```
 cargo build --release --features="cli-binary"
 ```
+
+# Credits
+
+WebScreenShot mainly uses the screenshot functionality provided by the [headless_chrome](https://github.com/atroche/rust-headless-chrome/) library. It isn't affiliated with the team who makes headless_chrome, but intends to be a convinent way to screenshot webpages from the command line.
