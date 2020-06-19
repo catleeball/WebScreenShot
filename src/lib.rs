@@ -22,7 +22,7 @@ pub enum OutputFormat {PNG, JPG, PDF}
 /// // Screenshot a page.
 /// let image_data = screenshot_tab(
 ///   "file:////tmp/test.html",
-///   OutputFormat::PNG, None, true, 1024, 800, "")?;
+///   OutputFormat::PNG, 80, false, 1024, 800, "")?;
 /// # more_asserts::assert_ge!(image_data.len(), 1024*800);
 /// # return Ok(())
 /// # }

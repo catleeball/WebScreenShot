@@ -5,7 +5,7 @@
 
 [package]
 name = "webscreenshot"
-version = "0.2.1"
+version = "0.2.3"
 authors = ["🎷🐛 Lee Ball <lee.cat.ball@gmail.com>"]
 edition = "2018"
 description = "A simple CLI tool to take screenshots of rendered webpages, given a URL or local file path."
