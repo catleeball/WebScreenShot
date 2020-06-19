@@ -8,7 +8,7 @@ fn get_args() -> clap::ArgMatches<'static> {
         .about("Take screenshots of Chrome-rendered webpages.")
         .version(crate_version!())
         .arg(Arg::with_name("url")
-            .help("URL or file to take a screencap of. i.e. https://example.com or file:///path/to/file.html")
+            .help("URL or file:/// path to take a screencap of. i.e. https://example.com or file:///path/to/file.html")
             .index(1)
             .required(true)
             .default_value("https://wikipedia.org"))
