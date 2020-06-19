@@ -9,20 +9,20 @@ USAGE:
     wss [FLAGS] [OPTIONS] <url> <output-path>
 
 FLAGS:
-        --help       Prints help information
-    -q               Display no messages to stdout.
-    -V, --version    Prints version information
-    -z               Screenshot only what is visible from the dimensions of the browser window, rather then the entire
-                     surface of the page.
+        --help            Prints help information
+    -q, --quiet           Display no messages to stdout.
+    -V, --version         Prints version information
+    -z, --visible-only    Screenshot only what is visible from the dimensions of the browser window, rather then the
+                          entire surface of the page.
 
 OPTIONS:
-    -h <browser-height>        Height of the browser to render the webpage in. [default: 800]
-    -w <browser-width>         Width of the browser to render the webpage in. [default: 1024]
-    -e <element>               CSS selector of element to screenshot.
-    -f <format>                Format to save screenshot as. Must be one of png, jpg, or pdf. [default: png]  [possible
-                               values: png, jpg, pdf]
-    -j <jpg-quality>           Quality of jpg screenshot to output, 0-100. Will be ignored if --image-format is not set
-                               to jpg. [default: 80]
+    -h, --height <browser-height>      Height of the browser to render the webpage in. [default: 800]
+    -w, --width <browser-width>        Width of the browser to render the webpage in. [default: 1024]
+    -e, --element <element>            CSS selector of element to screenshot.
+    -f, --format <format>              Format to save screenshot as. Must be one of png, jpg, or pdf. [default: png]
+                                       [possible values: png, jpg, pdf]
+    -j, --jpg-quality <jpg-quality>    Quality of jpg screenshot to output, 0-100. Will be ignored if --image-format is
+                                       not set to jpg. [default: 80]
 
 ARGS:
     <url>            URL or file to take a screencap of. i.e. https://example.com or file:///path/to/file.html
