@@ -27,7 +27,7 @@ name = "webscreenshotlib"
 
 [[bin]]
 name = "wss"
-required-features = ["cli-binary"] 
+required-features = ["default"]
 
 [dependencies]
 failure = "^0.1.8"
