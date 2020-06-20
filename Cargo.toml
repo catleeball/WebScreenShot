@@ -5,7 +5,7 @@
 
 [package]
 name = "webscreenshot"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["🎷🐛 Lee Ball <lee.cat.ball@gmail.com>"]
 edition = "2018"
 description = "A simple CLI tool to take screenshots of rendered webpages, given a URL or local file path."
@@ -20,7 +20,7 @@ categories = ["command-line-utilities", "visualization", "development-tools::tes
 maintenance = { status = "experimental" }
 
 [features]
-cli-binary = ["clap"]
+default = ["clap"]
 
 [lib]
 name = "webscreenshotlib"

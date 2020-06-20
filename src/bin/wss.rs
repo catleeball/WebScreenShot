@@ -3,7 +3,7 @@ use webscreenshotlib::{OutputFormat, screenshot_tab, write_screenshot};
 
 /// Handle CLI arguments.
 fn get_args() -> clap::ArgMatches<'static> {
-    // TODO: Add PDF OptionsObject, verbose, and quiet flags.
+    // TODO: Add PDF OptionsObject.
     return App::new("WebScreenShot")
         .about("Take screenshots of Chrome-rendered webpages.")
         .version(crate_version!())
